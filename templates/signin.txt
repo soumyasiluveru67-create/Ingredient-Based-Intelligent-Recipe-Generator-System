@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<style>
+body{
+background:#ff7f50;
+font-family:Arial;
+text-align:center;
+padding-top:100px;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+background:black;
+color:white;
+border:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Create Account</h2>
+
+<form method="post" action="/signup">
+
+<input name="username" placeholder="Username" required>
+<br>
+
+<input name="password" type="password" placeholder="Password" required>
+<br>
+
+<button>Signup</button>
+
+</form>
+
+<br>
+
+<a href="/login">Login</a>
+
+</body>
+</html>

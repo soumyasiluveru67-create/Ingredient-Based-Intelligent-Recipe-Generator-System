@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Saved Recipes</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:url("https://images.unsplash.com/photo-1490645935967-10de6ba17061") no-repeat center;
+background-size:cover;
+}
+
+.overlay{
+background:rgba(0,0,0,0.7);
+min-height:100vh;
+padding:30px;
+color:white;
+text-align:center;
+}
+
+.card{
+background:white;
+color:black;
+padding:15px;
+margin:20px auto;
+width:80%;
+border-radius:10px;
+display:flex;
+gap:20px;
+}
+
+.card img{
+width:250px;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.card-content{
+flex:1;
+text-align:left;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<h1>Saved Recipes ⭐</h1>
+
+<button onclick="window.location='/'">
+Back
+</button>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+async function loadSaved(){
+
+let res = await fetch("/get_saved");
+let data = await res.json();
+
+let output="";
+
+data.forEach(r=>{
+
+let steps="<ol>";
+r.steps.forEach(s=>{
+steps+=`<li>${s}</li>`
+});
+steps+="</ol>";
+
+output += `
+
+<div class="card">
+
+<img src="${r.image}">
+
+<div class="card-content">
+
+<h2>${r.name}</h2>
+
+<p><b>Ingredients:</b> ${r.ingredients.join(", ")}</p>
+
+<p><b>Time:</b> ${r.time}</p>
+
+<p><b>Steps:</b> ${steps}</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("results").innerHTML = output;
+
+}
+
+loadSaved()
+
+</script>
+
+</body>
+</html>

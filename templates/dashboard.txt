@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:url("https://images.unsplash.com/photo-1490818387583-1baba5e638af") no-repeat center center/cover;
+height:100vh;
+}
+
+.overlay{
+background:rgba(0,0,0,0.6);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.dashboard{
+background:white;
+padding:40px;
+border-radius:15px;
+width:400px;
+text-align:center;
+}
+
+h2{
+margin-bottom:30px;
+}
+
+.btn{
+display:block;
+background:#ff7043;
+color:white;
+padding:12px;
+margin:10px 0;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.btn:hover{
+background:#ff5722;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="dashboard">
+
+<h2>🍽 Food Recipe Dashboard</h2>
+
+<a class="btn" href="/">🏠 Home</a>
+<a class="btn" href="/signup">📝 Signup</a>
+<a class="btn" href="/login">🔐 Login</a>
+<a class="btn" href="/saved">❤️ Saved Recipes</a>
+
+<a class="btn" href="#" onclick="alert('Upload from Home page')">
+📤 Upload Ingredient
+</a>
+
+<a class="btn" href="#" onclick="showTotal()">
+📊 Total Recipes
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function showTotal(){
+alert("Total Recipes Available: 15");
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Generator</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+
+    <h1>🍲 Recipe Generator</h1>
+
+    <input type="file" id="imageInput">
+    <br><br>
+    <button onclick="uploadImage()">Get Recipes</button>
+
+    <h2>Detected Ingredients:</h2>
+    <p id="ingredients"></p>
+
+    <h2>Recommended Recipes:</h2>
+    <div id="recipes"></div>
+
+<script>
+async function uploadImage() {
+    const fileInput = document.getElementById("imageInput");
+    const file = fileInput.files[0];
+
+    let formData = new FormData();
+    formData.append("file", file);
+
+    let response = await fetch("http://127.0.0.1:8000/auto-recommend", {
+        method: "POST",
+        body: formData
+    });
+
+    let data = await response.json();
+
+    document.getElementById("ingredients").innerText =
+        data.detected_ingredients.join(", ");
+
+    let recipesHTML = "";
+
+    data.recommendations.forEach(r => {
+        recipesHTML += `
+            <div style="border:1px solid black; padding:10px; margin:10px;">
+                <h3>${r.recipe}</h3>
+                <p>Match: ${r.match_percentage}%</p>
+                <p>Missing: ${r.missing_ingredients.join(", ")}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("recipes").innerHTML = recipesHTML;
+}
+</script>
+
+</body>
+</html>

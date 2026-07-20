@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upload Ingredients</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:url("https://images.unsplash.com/photo-1498837167922-ddd27525d352") no-repeat center center/cover;
+background-attachment:fixed;
+}
+
+.overlay{
+background:rgba(0,0,0,0.6);
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:1000px;
+margin:auto;
+}
+
+input{
+padding:10px;
+width:70%;
+border-radius:5px;
+border:1px solid gray;
+}
+
+button{
+padding:10px 20px;
+background:#ff5722;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.card{
+display:flex;
+background:#fff;
+margin-top:20px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card img{
+width:250px;
+object-fit:cover;
+}
+
+.card-content{
+padding:15px;
+flex:1;
+}
+
+.save-btn{
+background:green;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="container">
+
+<h2>Upload Ingredients</h2>
+
+<form id="recipeForm">
+
+<input type="text" name="ingredients" placeholder="Enter ingredients" required>
+
+<br><br>
+
+<input type="file" id="fileInput" accept=".txt">
+
+<br><br>
+
+<button type="submit">Get Recipes</button>
+
+</form>
+
+<div id="results"></div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("recipeForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const formData = new FormData(this);
+
+const response = await fetch("/get_recipes",{
+method:"POST",
+body:formData
+});
+
+const data = await response.json();
+
+let html="";
+
+data.forEach(r=>{
+
+html += `
+<div class="card">
+
+<img src="${r.image}">
+
+<div class="card-content">
+
+<h3>${r.name}</h3>
+
+<p><b>Ingredients:</b> ${r.ingredients.join(", ")}</p>
+
+<p><b>Missing:</b> ${r.missing.join(", ")}</p>
+
+<p><b>Match:</b> ${r.match}%</p>
+
+<p><b>Time:</b> ${r.time}</p>
+
+<p><b>Steps:</b> ${r.steps.join(" → ")}</p>
+
+<button class="save-btn" onclick='saveRecipe(${JSON.stringify(r)})'>
+Save Recipe
+</button>
+
+</div>
+</div>
+`
+
+});
+
+document.getElementById("results").innerHTML = html;
+
+});
+
+async function saveRecipe(recipe){
+
+await fetch("/save",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(recipe)
+});
+
+alert("Recipe Saved!");
+
+}
+
+document.getElementById("fileInput").addEventListener("change", function(){
+
+const file = this.files[0];
+
+if(!file) return;
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+document.querySelector("input[name='ingredients']").value = e.target.result;
+};
+
+reader.readAsText(file);
+
+});
+
+</script>
+
+</body>
+</html>

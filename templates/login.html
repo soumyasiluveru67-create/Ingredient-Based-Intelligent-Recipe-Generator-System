@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836") no-repeat center;
+background-size:cover;
+}
+
+.overlay{
+background:rgba(0,0,0,0.65);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.box{
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+width:300px;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:90%;
+}
+
+button{
+padding:10px 20px;
+background:#ff7f50;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+color:#ff7f50;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="box">
+
+<h2>Login</h2>
+
+<form method="post" action="/login">
+
+<input name="username" placeholder="Username" required>
+<br>
+
+<input name="password" type="password" placeholder="Password" required>
+<br>
+
+<button>Login</button>
+
+</form>
+
+<br>
+
+<a href="/signup">Create Account</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

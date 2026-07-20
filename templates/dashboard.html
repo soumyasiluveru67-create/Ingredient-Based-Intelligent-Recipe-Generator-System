@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352') no-repeat center center/cover;
+height:100vh;
+}
+
+.overlay{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.container{
+width:420px;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+h2{
+color:black;
+margin-bottom:25px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+background:white;
+color:black;
+font-size:16px;
+cursor:pointer;
+border:2px solid black;
+transition:0.3s;
+}
+
+.btn:hover{
+background:black;
+color:white;
+}
+
+.logout{
+border:2px solid red;
+color:red;
+}
+
+.logout:hover{
+background:red;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="container">
+
+<h2>Recipe Dashboard</h2>
+
+<button class="btn" onclick="location.href='/upload'">
+Upload Ingredients
+</button>
+
+<button class="btn" onclick="location.href='/saved'">
+Saved Recipes
+</button>
+
+<button class="btn" onclick="location.href='/'">
+Home
+</button>
+
+<button class="btn logout" onclick="location.href='/logout'">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
